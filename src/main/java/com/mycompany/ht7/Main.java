@@ -1,12 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *https://github.com/rociopalma/ht7AED.git
  */
 package com.mycompany.ht7;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ import java.util.Scanner;
  */
 public class Main {
 
+    Scanner leer = new Scanner(System.in);
     Node nodoEspanol;
     Node nodoIngles;
     Node nodoFrances;
@@ -27,7 +29,6 @@ public class Main {
         // TODO code application logic here
         (new Main()).Inicializar();
     }
-
 
     public int getAscii(String dato) {
         int Ascii = 0;
@@ -106,22 +107,27 @@ public class Main {
 
     public void buscar() {
         String resultado = "";
-        //preguntarle al usuario lo que necesita buscar
-        String palabra = "Yes";
+        /*System.out.print("Ingrese la parabra que quiere traducir");
+        String palabra = leer.next();
+        System.out.print("Ingrese el idioma origen de esta parabra ");
+        String idiomaOrigen = leer.next();
+        System.out.print("Ingrese el idioma destino");
+        String idiomaDestino = leer.next();*/
+        String palabra = "Homework";
         String idiomaOrigen = "Ingles";
-        String idiomaDestino = "Frances";
+        String idiomaDestino = "Espanol";
         Optional<Node> result;
         int key = getAscii(palabra.toUpperCase());
         switch (idiomaOrigen) {
             case "Espanol":
                 result = nodoEspanol.find(key);
                 if (result.isPresent()) {
-                    if(idiomaDestino.equals("Frances")){
+                    if (idiomaDestino.equals("Frances")) {
                         System.out.println(result.get().getFrances());
-                    }else if (idiomaDestino.equals("Ingles")){
+                    } else if (idiomaDestino.equals("Ingles")) {
                         System.out.println(result.get().getIngles());
                     }
-                    
+
                 } else {
                     System.out.println("*" + palabra + "*");
                 }
@@ -129,14 +135,14 @@ public class Main {
             case "Ingles":
                 result = nodoIngles.find(key);
                 if (result.isPresent()) {
-                    if(idiomaDestino.equals("Frances")){
+                    if (idiomaDestino.equals("Frances")) {
                         //System.out.println(result.get().getFrances());
                         resultado = result.get().getFrances();
-                    }else if (idiomaDestino.equals("Espanol")){
+                    } else if (idiomaDestino.equals("Espanol")) {
                         //System.out.println(result.get().getEspanol());
                         resultado = result.get().getEspanol();
                     }
-                    
+
                 } else {
                     //System.out.println("*" + palabra + "*");
                     resultado = "*" + palabra + "*";
@@ -146,20 +152,20 @@ public class Main {
                 //result = nodoEspanol.find(key);
                 result = nodoFrances.find(key);
                 if (result.isPresent()) {
-                    if(idiomaDestino.equals("Frances")){
+                    if (idiomaDestino.equals("Frances")) {
                         //System.out.println(result.get().getFrances());
                         resultado = result.get().getFrances();
-                    }else if (idiomaDestino.equals("Espanol")){
+                    } else if (idiomaDestino.equals("Espanol")) {
                         //System.out.println(result.get().getEspanol());
                         resultado = result.get().getEspanol();
                     }
-                    
+
                 } else {
                     //System.out.println("*" + palabra + "*");
                     resultado = "*" + palabra + "*";
                 }
                 break;
-                
+
         }
         escribirArchivo(resultado);
 
@@ -170,9 +176,26 @@ public class Main {
             System.out.println("*"+palabra+"*");
         }*/
     }
-    
-    public void escribirArchivo(String cadena){
-        System.out.println("Escribiendo el archivo "+cadena);
-    }
 
+    public void escribirArchivo(String cadena) {
+        System.out.println("Escribiendo el archivo... " + cadena);
+        FileWriter flwriter = null;
+        try {
+            flwriter = new FileWriter("Alumnos.txt", true);
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            bfwriter.write(cadena);
+            bfwriter.close();
+            System.out.println("Archivo modificado satisfactoriamente..");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (flwriter != null) {
+                try {
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
