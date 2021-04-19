@@ -74,6 +74,22 @@ public class Node<T> {
     }
     
     
+    
+    public void inOrder(){
+        if (left != null) {
+            left.inOrder();
+        }
+        System.out.println(imprimirNodo());
+        if (right != null) {
+            right.inOrder();
+        }
+        
+    }
+    
+    public String imprimirNodo(){
+        return "Key:" + espanol + "\n Data:\nSpanish: " + espanol + "\nInglis: " + ingles + "\nFrench: " + frances;
+        
+    }
 
     @Override
     public String toString() {

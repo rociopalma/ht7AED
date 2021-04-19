@@ -103,42 +103,45 @@ public class Main {
         key = getAscii(frances.toUpperCase());
         nodoFrances = new Node(key, espanol, ingles, frances);
         buscar();
+        //nodoEspanol.inOrder();
     }
 
     public void buscar() {
         String resultado = "";
-        /*System.out.print("Ingrese la parabra que quiere traducir");
-        String palabra = leer.next();
-        System.out.print("Ingrese el idioma origen de esta parabra ");
-        String idiomaOrigen = leer.next();
-        System.out.print("Ingrese el idioma destino");
-        String idiomaDestino = leer.next();*/
-        String palabra = "Homework";
+        System.out.println("Ingrese la parabra que quiere traducir");
+        String palabra = leer.nextLine();
+        System.out.println("Ingrese el idioma origen de esta parabra ");
+        String idiomaOrigen = leer.nextLine();
+        System.out.println("Ingrese el idioma destino");
+        String idiomaDestino = leer.nextLine();
+        /*String palabra = "Woman";
         String idiomaOrigen = "Ingles";
-        String idiomaDestino = "Espanol";
+        String idiomaDestino = "Espanol";*/
         Optional<Node> result;
         int key = getAscii(palabra.toUpperCase());
-        switch (idiomaOrigen) {
-            case "Espanol":
+        switch (idiomaOrigen.toUpperCase()) {
+            case "ESPANOL":
                 result = nodoEspanol.find(key);
                 if (result.isPresent()) {
-                    if (idiomaDestino.equals("Frances")) {
-                        System.out.println(result.get().getFrances());
-                    } else if (idiomaDestino.equals("Ingles")) {
-                        System.out.println(result.get().getIngles());
+                    if (idiomaDestino.toUpperCase().equals("FRANCES")) {
+                        //System.out.println(result.get().getFrances());
+                        resultado = result.get().getFrances();
+                    } else if (idiomaDestino.toUpperCase().equals("INGLES")) {
+                        //System.out.println(result.get().getIngles());
+                        resultado = result.get().getIngles();
                     }
 
                 } else {
                     System.out.println("*" + palabra + "*");
                 }
                 break;
-            case "Ingles":
+            case "INGLES":
                 result = nodoIngles.find(key);
                 if (result.isPresent()) {
-                    if (idiomaDestino.equals("Frances")) {
+                    if (idiomaDestino.toUpperCase().equals("FRANCES")) {
                         //System.out.println(result.get().getFrances());
                         resultado = result.get().getFrances();
-                    } else if (idiomaDestino.equals("Espanol")) {
+                    } else if (idiomaDestino.toUpperCase().equals("ESPANOL")) {
                         //System.out.println(result.get().getEspanol());
                         resultado = result.get().getEspanol();
                     }
@@ -148,14 +151,14 @@ public class Main {
                     resultado = "*" + palabra + "*";
                 }
                 break;
-            case "Frances":
+            case "FRANCES":
                 //result = nodoEspanol.find(key);
                 result = nodoFrances.find(key);
                 if (result.isPresent()) {
-                    if (idiomaDestino.equals("Frances")) {
+                    if (idiomaDestino.toUpperCase().equals("FRANCES")) {
                         //System.out.println(result.get().getFrances());
                         resultado = result.get().getFrances();
-                    } else if (idiomaDestino.equals("Espanol")) {
+                    } else if (idiomaDestino.toUpperCase().equals("ESPANOL")) {
                         //System.out.println(result.get().getEspanol());
                         resultado = result.get().getEspanol();
                     }
@@ -165,11 +168,12 @@ public class Main {
                     resultado = "*" + palabra + "*";
                 }
                 break;
-
+            default:
+                System.out.println("Idioma no permitido. Usar: Ingles, Espanol o Ingles");
         }
         escribirArchivo(resultado);
 
-        /* Optional<Node> result = nodoEspanol.find(key);
+        /*Optional<Node> result = nodoEspanol.find(key);
         if (result.isPresent()) {
             System.out.println(result.get().getFrances());
         } else {
@@ -181,7 +185,7 @@ public class Main {
         System.out.println("Escribiendo el archivo... " + cadena);
         FileWriter flwriter = null;
         try {
-            flwriter = new FileWriter("Alumnos.txt", true);
+            flwriter = new FileWriter("Traduccion.txt", true);
             BufferedWriter bfwriter = new BufferedWriter(flwriter);
             bfwriter.write(cadena);
             bfwriter.close();
