@@ -39,6 +39,35 @@ public class Main {
         return Ascii;
 
     }
+    
+    /*public void menu(){
+        int opcion = 1;
+        while (opcion != 3) {
+            System.out.println("**********Bienvenido*************");
+            System.out.println("1. Traducir palabra");
+            System.out.println("2. Imprimir in order");
+            System.out.println("3) ---SALIR---");
+            opcion = leer.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    Inicializar();
+
+                    break;
+                case 2:
+                    nodoEspanol.inOrder();
+
+                    break;
+
+                
+
+                default:
+                    System.out.println("Hasta pronto");
+                    break;
+            }//fin case
+            
+        }//fin while
+    }*/
 
     public void Inicializar() {
         String ingles = "house", espanol = "casa", frances = "loger";
@@ -103,7 +132,7 @@ public class Main {
         key = getAscii(frances.toUpperCase());
         nodoFrances = new Node(key, espanol, ingles, frances);
         buscar();
-        //nodoEspanol.inOrder();
+        nodoEspanol.inOrder();
     }
 
     public void buscar() {

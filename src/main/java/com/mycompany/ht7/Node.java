@@ -76,6 +76,8 @@ public class Node<T> {
     
     
     public void inOrder(){
+        
+        
         if (left != null) {
             left.inOrder();
         }
